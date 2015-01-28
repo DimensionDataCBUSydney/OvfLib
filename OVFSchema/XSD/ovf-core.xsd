@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/envelope"
+  xmlns:ovf="/var/opt/SUNWldom/envelope"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ 
+  <xs:include schemaLocation="ovf-section.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+ 
+  <!-- A user defined annotation on an entity -->
+  <xs:complex name="AnnotationSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <!-- Several localized annotations can be included -->
+          <xs:element name="Annotation" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0"
+            maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- Product information about a virtual appliance -->
+  <xs:complex name="ProductSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="Product" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="Vendor" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="Version" ="xs:string" minOccurs="0"/>
+          <xs:element name="Full-version" ="xs:string" minOccurs="0"/>
+          <xs:element name="ProductUrl" ="xs:string" minOccurs="0"/>
+          <xs:element name="VendorUrl" ="xs:string" minOccurs="0"/>
+          <xs:element name="AppUrl" ="xs:string" minOccurs="0"/>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- Configuration parameters that can be passed to the virtual machine for
+    application-level configuration -->
+  <xs:complex name="PropertySection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="Property" maxOccurs="unbounded">
+            <xs:complex>
+              <xs:sequence>
+                <xs:element name="Description" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0"
+                  maxOccurs="unbounded"/>
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+              <xs:attribute name="key" ="xs:string"/>
+              <xs:attribute name="" ="xs:string"/>
+              <xs:attribute name="configurableByUser" ="xs:boolean" use="optional"/>
+              <xs:attribute name="configurableAtRuntime" ="xs:boolean" use="optional"/>
+              <xs:attribute name="defaultValue" ="xs:string" use="optional"/>
+              <xs:anyAttribute namespace="##any"/>
+            </xs:complex>
+          </xs:element>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <!-- A comma-separated list of transports that are supported by the virtual machine to
+          access the OVF environment. -->
+        <xs:attribute name="transport" ="xs:string" use="optional"/>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- Provides descriptions for the logical networks used within the package. These descriptions are
+    typically used as an aid when the package is deployed. -->
+  <xs:complex name="NetworkSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="Network" maxOccurs="unbounded">
+            <xs:complex>
+              <xs:sequence>
+                <xs:element name="Description" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0"
+                  maxOccurs="unbounded"/>
+                <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+              <xs:attribute name="name" ="xs:string" use="required"/>
+              <xs:anyAttribute namespace="##any"/>
+            </xs:complex>
+          </xs:element>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- Provides meta-information description of the virtual disks in the package -->
+  <xs:complex name="DiskSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="Disk" ="ovf:VirtualDiskDesc_" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+  <!-- Disk -->
+  <xs:complex name="VirtualDiskDesc_">
+    <!-- A logical ID for the virtual disk within this package -->
+    <xs:attribute name="diskId" ="xs:string" use="required"/>
+    <!-- A file reference to the virtual disk file. If this is not specified a blank virtual disk is
+      created of the given size -->
+    <xs:attribute name="fileRef" ="xs:string" use="optional"/>
+    <!-- Capacity in bytes. The capacity can be specified as either a size or as a reference to a property
+      using $(property_name) -->
+    <xs:attribute name="capacity" ="xs:string" use="required"/>
+    <!-- Format of the disk. The format is an URL that identifies the disk ,
+      e.g., http://www.vmware.com/format/vmdk.html#sparse -->
+    <xs:attribute name="format" ="xs:string" use="required"/>
+    <!-- Populated size of disk. This is an estimation of how much storage the disk needs if backed by
+      a non pre-allocated (aka. sparse) disk. This size does not take the meta-data into
+      account used by a sparse disk. -->
+    <xs:attribute name="populatedSize" ="xs:long" use="optional"/>
+    <!-- Reference to a potential parent disk -->
+    <xs:attribute name="parentRef" ="xs:string" use="optional"/>
+  </xs:complex>
+ 
+  <!-- CPU Architecture requirements for the guest software. -->
+  <xs:complex name="CpuCompatibilitySection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="Level" maxOccurs="unbounded">
+            <xs:complex>
+              <xs:attribute name="level" ="xs:int" use="optional"/>
+              <xs:attribute name="eax" ="xs:string" use="optional"/>
+              <xs:attribute name="ebx" ="xs:string" use="optional"/>
+              <xs:attribute name="ecx" ="xs:string" use="optional"/>
+              <xs:attribute name="edx" ="xs:string" use="optional"/>
+            </xs:complex>
+          </xs:element>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="Vendor" ="xs:string"/>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- Specification of the operating system installed in the guest -->
+  <xs:complex name="OperatingSystemSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="Description" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <!-- The IDs are the enumeration used in CIM_OperatingSystem_ -->
+        <xs:attribute name="id" ="xs:string"/>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- End-User License Agreement -->
+  <xs:complex name="EulaSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <!-- Contains the license agreement in plain text. Several different locales can be
+            specified -->
+          <xs:element name="License" ="ovf:Info_" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- For a VirtualSystemCollection, this section is used to specify the order in which the
+    contained entities are to be powered on. -->
+  <xs:complex name="StartupSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+            <xs:complex>
+              <!-- Id of entity in collection -->
+              <xs:attribute name="id" ="xs:string"/>
+              <!-- Startup order. Entities are started up starting with lower-numbers first. Items with
+                same order identifier may be started up concurrently or in any order.
+                The order is reversed for shutdown. -->
+              <xs:attribute name="order" ="xs:int"/>
+              <!-- Delay in seconds to wait for the power on to complete -->
+              <xs:attribute name="startDelay" ="xs:int"/>
+              <!-- Whether to resume power-on sequence, once the guest reports ok. -->
+              <xs:attribute name="waitingForGuest" ="xs:boolean"/>
+              <!-- Delay in seconds to wait for the power on to complete -->
+              <xs:attribute name="stopDelay" ="xs:int"/>
+              <!-- Stop action to use. Valid values are: 'powerOn' (default), 'none'. -->
+              <xs:attribute name="startAction" ="xs:string"/>
+              <!-- Stop action to use. Valid values are: 'powerOff' (default), 'guestShutdown',
+                'suspend'. -->
+              <xs:attribute name="stopAction" ="xs:string"/>
+              <xs:anyAttribute namespace="##any"/>
+            </xs:complex>
+          </xs:element>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <!-- A comma-separated list of transports that the virtual machine supports to provide
+          feedback. -->
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- If this section is present, it indicates that the virtual machine needs to be initially
+    booted to install and configure the software. -->
+  <xs:complex name="InstallSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0"
+            maxOccurs="unbounded"/>
+          <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <!-- A comma-separated list of transports that the virtual machine supports to provide
+          feedback. -->
+        <xs:attribute name="transport" ="xs:string"/>
+        <xs:anyAttribute namespace="##any"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+</xs:schema>

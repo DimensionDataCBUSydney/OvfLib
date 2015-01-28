@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/CIM_ResourceAllocationSettingData"
+  xmlns:class="/var/opt/SUNWldom/CIM_ResourceAllocationSettingData"
+  xmlns:cim="/var/opt/SUNWldom/common"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ 
+  <xs:import namespace="/var/opt/SUNWldom/common" schemaLocation="cim-common.xsd"/>
+ 
+  <xs:element name="Caption" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="Description" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="InstanceId" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="Resource" nillable="true">
+    <xs:complex>
+      <xs:simpleContent>
+        <xs:restriction base="xs:any">
+          <xs:simple>
+            <xs:union>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:enumeration value="1"/> <!-- Other -->
+                  <xs:enumeration value="2"/> <!-- Computer System -->
+                  <xs:enumeration value="3"/> <!-- Processor-->
+                  <xs:enumeration value="4"/> <!-- Memory-->
+                  <xs:enumeration value="5"/> <!-- IDE Controller -->
+                  <xs:enumeration value="6"/> <!-- Parallel SCSI HBA -->
+                  <xs:enumeration value="7"/> <!-- FC HBA -->
+                  <xs:enumeration value="8"/> <!-- iSCSI HBA -->
+                  <xs:enumeration value="9"/> <!-- IB HCA -->
+                  <xs:enumeration value="10"/> <!-- Ethernet Adapter -->
+                  <xs:enumeration value="11"/> <!-- Other Network Adapter -->
+                  <xs:enumeration value="12"/> <!-- I/O Slot -->
+                  <xs:enumeration value="13"/> <!-- I/O Device -->
+                  <xs:enumeration value="14"/> <!-- Floppy Drive -->
+                  <xs:enumeration value="15"/> <!-- CD Drive -->
+                  <xs:enumeration value="16"/> <!-- DVD drive -->
+                  <xs:enumeration value="17"/> <!-- Disk Drive -->
+                  <xs:enumeration value="18"/> <!-- Tape Drive -->
+                  <xs:enumeration value="19"/> <!-- Storage Extent -->
+                  <xs:enumeration value="20"/> <!-- Other storage device -->
+                  <xs:enumeration value="21"/> <!-- Serial port -->
+                  <xs:enumeration value="22"/> <!-- Parallel port -->
+                  <xs:enumeration value="23"/> <!-- USB Controller -->
+                  <xs:enumeration value="24"/> <!-- Graphics controller -->
+                  <xs:enumeration value="25"/> <!-- IEEE 1394 Controller -->
+                  <xs:enumeration value="26"/> <!-- Partitionable Unit -->
+                  <xs:enumeration value="27"/> <!-- Base Partitionable Unit -->
+                  <xs:enumeration value="28"/> <!-- Power Supply -->
+                  <xs:enumeration value="29"/> <!-- Cooling Device -->
+                  <xs:enumeration value="29"/> <!-- Cooling Device -->
+                  <xs:enumeration value="31"/> <!-- PS2 Controller -->
+                  <xs:enumeration value="32"/> <!-- SIO Controller -->
+                  <xs:enumeration value="33"/> <!-- Keyboard -->
+                  <xs:enumeration value="34"/> <!-- Pointing Device -->
+                </xs:restriction>
+              </xs:simple>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:minInclusive value="30"/>
+                  <xs:maxInclusive value="32769"/>
+                </xs:restriction>
+              </xs:simple>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:minInclusive value="32768"/>
+                  <xs:maxInclusive value="65535"/>
+                </xs:restriction>
+              </xs:simple>
+            </xs:union>
+          </xs:simple>
+          <xs:anyAttribute namespace="##any"/>
+        </xs:restriction>
+      </xs:simpleContent>
+    </xs:complex>
+  </xs:element>
+ 
+  <xs:element name="OtherResource" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="ResourceSub" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="PoolID" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="ConsumerVisibility" nillable="true">
+    <xs:complex>
+      <xs:simpleContent>
+        <xs:restriction base="xs:any">
+          <xs:simple>
+            <xs:union>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:enumeration value="0"/>
+                  <xs:enumeration value="2"/>
+                  <xs:enumeration value="3"/>
+                  <xs:enumeration value="4"/>
+                </xs:restriction>
+              </xs:simple>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:minInclusive value="5"/>
+                  <xs:maxInclusive value="32768"/>
+                </xs:restriction>
+              </xs:simple>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:minInclusive value="32767"/>
+                  <xs:maxInclusive value="65535"/
+                </xs:restriction>
+              </xs:simple>
+            </xs:union>
+          </xs:simple>
+          <xs:anyAttribute namespace="##any"/>
+        </xs:restriction>
+      </xs:simpleContent>
+    </xs:complex>
+  </xs:element>
+ 
+  <xs:element name="HostResource" nillable="true" ="xs:any"/>
+  <xs:element name="AllocationUnits" nillable="true" ="cim:cimString"/>
+  <xs:element name="VirtualQuantity" nillable="true" ="cim:cimUnsignedLong"/>
+  <xs:element name="Reservation" nillable="true" ="cim:cimUnsignedLong"/>
+  <xs:element name="Limit" nillable="true" ="cim:cimUnsignedLong"/>
+  <xs:element name="Weight" nillable="true" ="cim:cimUnsignedInt"/>
+  <xs:element name="AutomaticAllocation" nillable="true" ="cim:cimBoolean"/>
+  <xs:element name="AutomaticDeallocation" nillable="true" ="cim:cimBoolean"/>
+  <xs:element name="Parent" nillable="true" ="cim:cimString"/>
+  <xs:element name="Connection" nillable="true" ="cim:cimString"/>
+  <xs:element name="Address" nillable="true" ="cim:cimString"/
+  <xs:element name="MappingBehavior" nillable="true">
+    <xs:complex>
+      <xs:simpleContent>
+        <xs:restriction base="xs:any">
+          <xs:simple>
+            <xs:union>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:enumeration value="0"/>
+                  <xs:enumeration value="1"/>
+                  <xs:enumeration value="2"/>
+                  <xs:enumeration value="3"/>
+                  <xs:enumeration value="4"/>
+                </xs:restriction>
+              </xs:simple>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort">
+                  <xs:minInclusive value="5"/>
+                  <xs:maxInclusive value="32768"/>
+                </xs:restriction>
+              </xs:simple>
+              <xs:simple>
+                <xs:restriction base="xs:unsignedShort"
+                  <xs:minInclusive value="32767"/>
+                  <xs:maxInclusive value="65535"/>
+                </xs:restriction>
+              </xs:simple>
+            </xs:union>
+          </xs:simple>
+          <xs:anyAttribute namespace="##any"/>
+        </xs:restriction>
+      </xs:simpleContent>
+    </xs:complex>
+  </xs:element>
+  <xs:element name="AddressOnParent" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="BusNumber" nillable="true" ="cim:cimUnsignedShort"/>
+ 
+  <xs:complex name="CIM_ResourceAllocationSettingData_">
+    <xs:sequence>
+      <xs:element ref="class:Caption" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="class:Description" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="class:InstanceId" minOccurs="0"/>
+      <xs:element ref="class:Resource" minOccurs="0"/>
+      <xs:element ref="class:OtherResource" minOccurs="0"/>
+      <xs:element ref="class:ResourceSub" minOccurs="0"/>
+      <xs:element ref="class:PoolID" minOccurs="0"/>
+      <xs:element ref="class:ConsumerVisibility" minOccurs="0"/>
+      <xs:element ref="class:HostResource" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element ref="class:AllocationUnits" minOccurs="0"/>
+      <xs:element ref="class:VirtualQuantity" minOccurs="0"/>
+      <xs:element ref="class:Reservation" minOccurs="0"/>
+      <xs:element ref="class:Limit" minOccurs="0"/>
+      <xs:element ref="class:Weight" minOccurs="0"/>
+      <xs:element ref="class:AutomaticAllocation" minOccurs="0"/>
+      <xs:element ref="class:AutomaticDeallocation" minOccurs="0"/>
+      <xs:element ref="class:Parent" minOccurs="0"/>
+      <xs:element ref="class:Connection" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element ref="class:Address" minOccurs="0"/>
+      <xs:element ref="class:MappingBehavior" minOccurs="0"/>
+      <xs:element ref="class:AddressOnParent" minOccurs="0"/>
+      <xs:element ref="class:BusNumber" minOccurs="0"/>
+      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##any"/>
+  </xs:complex>
+ 
+  <xs:element name="CIM_ResourceAllocationSettingData"
+    ="class:CIM_ResourceAllocationSettingData_"/>
+</xs:schema>

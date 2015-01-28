@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/Binding"
+  xmlns:class="/var/opt/SUNWldom/Binding"
+  xmlns:rasd="/var/opt/SUNWldom/CIM_ResourceAllocationSettingData"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ 
+  <xs:import namespace="/var/opt/SUNWldom/CIM_ResourceAllocationSettingData"
+      schemaLocation="cim-rasd.xsd"/>
+ 
+  <xs:complex name="Binding_">
+    <xs:sequence>
+      <xs:element name="Item"
+        ="rasd:CIM_ResourceAllocationSettingData_"/>
+    </xs:sequence>
+  </xs:complex>
+</xs:schema>

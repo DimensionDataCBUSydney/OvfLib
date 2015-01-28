@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/GenericProperty"
+  xmlns:class="/var/opt/SUNWldom/GenericProperty"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ 
+  <xs:complex name="GenericProperty_" ="xs:string">
+  <xs:attribute name="key" ="xs:string" use="required"/>
+ 
+  </xs:complex>
+  <xs:element name="GenericProperty" ="class:GenericProperty_"/>
+ 
+</xs:schema>

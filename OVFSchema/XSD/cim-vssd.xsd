@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/CIM_VirtualSystemSettingData"
+  xmlns:class="/var/opt/SUNWldom/CIM_VirtualSystemSettingData"
+  xmlns:cim="/var/opt/SUNWldom/common"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ 
+  <xs:import namespace="/var/opt/SUNWldom/common"
+    schemaLocation="cim-common.xsd"/>
+ 
+  <xs:element name="Caption" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="Description" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="InstanceId" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="VirtualSystemIdentifier" nillable="true" ="cim:cimString"/>
+ 
+  <xs:element name="VirtualSystem" nillable="true" ="cim:cimString"/>
+ 
+  <xs:complex name="CIM_VirtualSystemSettingData_">
+    <xs:sequence>
+      <xs:element ref="class:Caption" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="class:Description" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="class:InstanceId" minOccurs="0"/>
+      <xs:element ref="class:VirtualSystemIdentifier" minOccurs="0"/>
+      <xs:element ref="class:VirtualSystem" minOccurs="0"/>
+      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##any"/>
+  </xs:complex>
+ 
+  <xs:element name="CIM_VirtualSystemSettingData" ="class:CIM_VirtualSystemSettingData_"/>
+ 
+</xs:schema>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/envelope"
+  xmlns:ovf="/var/opt/SUNWldom/envelope"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- Include virtual hardware schema -->
+	<xs:include schemaLocation="./ovf-section.xsd"/>
+	<xs:include schemaLocation="./cim-virtualhardware.xsd"/>
+	<xs:include schemaLocation="./ovf-core.xsd"/>
+
+	<!-- Root element of a OVF package-->
+	<xs:element name="Envelope" ="ovf:Envelope_"/>
+
+	<xs:complex name="Envelope_">
+		<xs:sequence>
+			<!--- References to all external files -->
+			<xs:element name="References" ="ovf:References_"/>
+
+			<!-- Package level meta-data -->
+			<xs:element name="Section" ="ovf:Section_" minOccurs="0" maxOccurs="unbounded"/>
+
+			<!-- Content. A virtual machine or a vService -->
+			<xs:element name="Content" ="ovf:Entity_" minOccurs="0" maxOccurs="unbounded"/>
+
+			<xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="signed" ="xs:boolean" use="optional"/>
+		<xs:attribute name="manifest" ="xs:boolean" use="optional"/>
+		<xs:anyAttribute namespace="##any"/>
+	</xs:complex>
+
+	<xs:complex name="References_">
+		<xs:sequence>
+			<xs:element name="File" ="ovf:File_" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:anyAttribute namespace="##any"/>
+	</xs:complex>
+
+	<!-- for an external reference to a resource -->
+	<xs:complex name="File_">
+		<xs:sequence>
+			<xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+
+		<!-- Reference key used in other parts of the package -->
+		<xs:attribute name="id" ="xs:string" use="required"/>
+		<!-- Same as using a single part element -->
+		<xs:attribute name="href" ="xs:string" use="required"/>
+		<!-- Size in bytes of the files (if known) -->
+		<xs:attribute name="size" ="xs:integer" use="optional"/>
+		<!-- Estimated size in bytes of the files (if a good guess is known) -->
+		<xs:attribute name="estSize" ="xs:integer" use="optional"/>
+		<!-- Compression  (gzip or bzip2) -->
+		<xs:attribute name="compression" ="xs:string" use="optional"/>
+		<!-- Chunk size (except of last chunk) -->
+		<xs:attribute name="chunkSize" ="xs:long" use="optional"/>
+
+		<xs:anyAttribute namespace="##any"/>
+	</xs:complex>
+
+	<!-- Base class for an entity -->
+	<xs:complex name="Entity_" abstract="true">
+		<xs:sequence>
+			<xs:element name="Info" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Section" ="ovf:Section_" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" ="xs:string" use="required"/>
+	</xs:complex>
+
+	<!-- A Virtual Machine Entity -->
+	<xs:complex name="VirtualSystem_">
+		<xs:complexContent>
+			<xs:extension base="ovf:Entity_"> </xs:extension>
+		</xs:complexContent>
+	</xs:complex>
+
+	<!-- A Composite Service -->
+	<xs:complex name="VirtualSystemCollection_">
+		<xs:complexContent>
+			<xs:extension base="ovf:Entity_">
+				<xs:sequence>
+					<xs:element name="Content" ="ovf:Entity_" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complex>
+</xs:schema>

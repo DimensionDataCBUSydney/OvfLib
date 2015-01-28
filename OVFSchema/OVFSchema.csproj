@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28523FD7-097B-419F-BFB6-4AF8AD57D2EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OVFSchema</RootNamespace>
+    <AssemblyName>OVFSchema</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnnotationSection.cs" />
+    <Compile Include="Info.cs" />
+    <Compile Include="ovf-core.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ovf-section.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="VirtualDiskDesc.cs" />
+    <Compile Include="PropertySection.cs" />
+    <Compile Include="PropertySectionProperty.cs" />
+    <Compile Include="ProductSection.cs" />
+    <Compile Include="VirtualSystemCollection.cs" />
+    <Compile Include="NetworkSection.cs" />
+    <Compile Include="NetworkSectionNetwork.cs" />
+    <Compile Include="VirtualSystem.cs" />
+    <Compile Include="DiskSection.cs" />
+    <Compile Include="CpuCompatibilitySectionLevel.cs" />
+    <Compile Include="CpuCompatibilitySection.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="EulaSection.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="InstallSection.cs" />
+    <Compile Include="OperatingSystemSection.cs" />
+    <Compile Include="Envelope.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="References.cs" />
+    <Compile Include="Section.cs" />
+    <Compile Include="StartupSection.cs" />
+    <Compile Include="StartupSectionItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="XSD\Binding_Type.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\cim-common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\cim-rasd.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\cim-vssd.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\GenericProperty.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\ovf-core.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\ovf-envelope.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\ovf-section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XSD\ovf-virtualhardware.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

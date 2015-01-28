@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/envelope"
+  xmlns:ovf="/var/opt/SUNWldom/envelope"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:vssd="/var/opt/SUNWldom/CIM_VirtualSystemSettingData
+  xmlns:rasd="/var/opt/SUNWldom/CIM_ResourceAllocationSettingData">
+ 
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+ 
+  <xs:include schemaLocation="ovf-section.xsd"/>
+ 
+  <xs:import namespace="/var/opt/SUNWldom/CIM_VirtualSystemSettingData" schemaLocation="cim-vssd.xsd"/>
+  <xs:import namespace="/var/opt/SUNWldom/CIM_ResourceAllocationSettingData"
+    schemaLocation="cim-rasd.xsd"/>
+ 
+  <!-- Specifies the virtual hardware for a virtual machine -->
+  <xs:complex name="VirtualHardwareSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="System" ="vssd:CIM_VirtualSystemSettingData_" minOccurs="0"/>
+          <xs:element name="Item" ="rasd:CIM_ResourceAllocationSettingData_"
+            minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+ 
+  <!-- Specifies a section for resource constraints on a VirtualSystemCollection -->
+  <xs:complex name="ResourceAllocationSection_">
+    <xs:complexContent>
+      <xs:extension base="ovf:Section_">
+        <xs:sequence>
+          <xs:element name="Item" ="rasd:CIM_ResourceAllocationSettingData_"
+            minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complex>
+</xs:schema>

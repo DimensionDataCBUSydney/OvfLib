@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="/var/opt/SUNWldom/envelope"
+  xmlns:ovf="/var/opt/SUNWldom/envelope"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+
+  <!-- The base class for a section. Subclassing this is the most common form of extensibility -->
+  <xs:complex name="Section_" abstract="true">
+    <xs:sequence>
+      <!-- The info element specifies the meaning of the section. This is typically shown
+        if the section is not understood by the importer -->
+      <xs:element name="Info" ="ovf:Info_" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  <!-- Whether the import should fail or not, if the section is not understood -->
+    <xs:attribute name="required" ="xs:boolean" use="optional"/>
+    <xs:anyAttribute namespace="##any"/>
+    <!-- Subs defines more specific elements -->
+  </xs:complex>
+ 
+  <!-- A basic  for a localizable string -->
+  <xs:complex name="Info_">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xml:lang"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complex>
+</xs:schema>
